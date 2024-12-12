@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt Arbeitsstunden</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Projekt Arbeitsstunden Eingabe</h1>
+    <form id="projectForm">
+        <label for="projectName">Projektname:</label>
+        <select id="projectName"></select>
+        <br>
+        <label for="clientName">Kundenname:</label>
+        <select id="clientName"></select>
+        <br>
+        <label for="startDate">Startdatum:</label>
+        <input type="date" id="startDate">
+        <br>
+        <label for="endDate">Enddatum:</label>
+        <input type="date" id="endDate">
+        <br>
+        <button type="button" onclick="window.generateTimesheet()">Zeiterfassung erstellen</button>
+    </form>
+    <div id="timesheet"></div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
