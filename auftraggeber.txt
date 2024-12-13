@@ -1,3 +1,3 @@
-Auftraggeber 1
-Auftraggeber 2
-Auftraggeber 3
+Auftraggeber 1, Musterstraße 1, 12345 Musterstadt
+Auftraggeber 2, Beispielweg 2, 67890 Beispielstadt
+Auftraggeber 3, Testallee 3, 10111 Teststadt

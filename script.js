@@ -45,7 +45,8 @@ function loadMainCustomers(file, selectElement) {
         .then(text => {
             const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
             lines.forEach(line => {
-                const [name, address] = line.split(';');
+                const [name, ...addressParts] = line.split(',');
+                const address = addressParts.join(',').trim();
                 mainCustomers[name] = address;
                 selectElement.option(name);
             });
