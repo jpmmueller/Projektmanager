@@ -1,4 +1,4 @@
-let projectNameSelect, clientNameSelect, startDateInput, endDateInput, generateButton;
+let projectNameSelect, clientNameSelect, mainCustomerSelect, startDateInput, endDateInput, generateButton;
 
 function setup() {
     noCanvas();
@@ -11,6 +11,10 @@ function setup() {
     createElement('label', 'Kundenname:').parent('formContainer');
     clientNameSelect = createSelect().parent('formContainer');
     loadOptions('clients.txt', clientNameSelect);
+
+    createElement('label', 'Auftraggeber:').parent('formContainer');
+    mainCustomerSelect = createSelect().parent('formContainer');
+    loadOptions('auftraggeber.txt', mainCustomerSelect);
 
     createElement('label', 'Startdatum:').parent('formContainer');
     startDateInput = createInput('', 'date').parent('formContainer');
@@ -37,6 +41,7 @@ function loadOptions(file, selectElement) {
 function generateTimesheet() {
     const projectName = projectNameSelect.value();
     const clientName = clientNameSelect.value();
+    const mainCustomer = mainCustomerSelect.value();
     const startDate = new Date(startDateInput.value());
     const endDate = new Date(endDateInput.value());
     const timesheetDiv = select('#timesheet');
@@ -59,13 +64,14 @@ function generateTimesheet() {
     html += `<button onclick="generateInvoice()">Rechnung erstellen</button>`;
     timesheetDiv.html(html);
 
-    saveProjectData(projectName, clientName, startDate, endDate);
+    saveProjectData(projectName, clientName, mainCustomer, startDate, endDate);
 }
 
-function saveProjectData(projectName, clientName, startDate, endDate) {
+function saveProjectData(projectName, clientName, mainCustomer, startDate, endDate) {
     const data = {
         projectName,
         clientName,
+        mainCustomer,
         startDate: startDate.toISOString().split('T')[0],
         endDate: endDate.toISOString().split('T')[0]
     };
@@ -89,6 +95,6 @@ function generateInvoice() {
         }
     });
 
-    const invoiceDiv = createDiv(`<h2>Rechnung</h2><p>Gesamtarbeitsstunden: ${totalHours}</p>`);
+    const invoiceDiv = createDiv(`<h2>Rechnung</h2><p>Gesamtarbeitsstunden: ${totalHours}</p><p>Auftraggeber: ${mainCustomerSelect.value()}</p>`);
     invoiceDiv.parent('timesheet');
 }
