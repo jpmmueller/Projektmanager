@@ -1,5 +1,5 @@
 Hier schreibt Jörg Müller.
-Ich habe MS Copilot gebeten mir Code für eine Website mit Typescript zu schreiben um 
+Ich habe MS Copilot gebeten mir Code für eine Website mit p5.js zu schreiben um 
 ein Projektmanagment Tool zu erstellen.
 Ziel ist es das alles so zum Laufen zu bekommen, dass ich:
 - alle Daten in verschiedenen Textdateien speichern kann.
