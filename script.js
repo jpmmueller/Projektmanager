@@ -1,4 +1,5 @@
 let projectNameSelect, clientNameSelect, mainCustomerSelect, startDateInput, endDateInput, generateButton;
+let mainCustomers = {};
 
 function setup() {
     noCanvas();
@@ -14,7 +15,7 @@ function setup() {
 
     createElement('label', 'Auftraggeber:').parent('formContainer');
     mainCustomerSelect = createSelect().parent('formContainer');
-    loadOptions('auftraggeber.txt', mainCustomerSelect);
+    loadMainCustomers('auftraggeber.txt', mainCustomerSelect);
 
     createElement('label', 'Startdatum:').parent('formContainer');
     startDateInput = createInput('', 'date').parent('formContainer');
@@ -36,6 +37,20 @@ function loadOptions(file, selectElement) {
             });
         })
         .catch(error => console.error('Error loading options:', error));
+}
+
+function loadMainCustomers(file, selectElement) {
+    fetch(file)
+        .then(response => response.text())
+        .then(text => {
+            const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+            lines.forEach(line => {
+                const [name, address] = line.split(';');
+                mainCustomers[name] = address;
+                selectElement.option(name);
+            });
+        })
+        .catch(error => console.error('Error loading main customers:', error));
 }
 
 function generateTimesheet() {
@@ -95,6 +110,9 @@ function generateInvoice() {
         }
     });
 
-    const invoiceDiv = createDiv(`<h2>Rechnung</h2><p>Gesamtarbeitsstunden: ${totalHours}</p><p>Auftraggeber: ${mainCustomerSelect.value()}</p>`);
+    const mainCustomer = mainCustomerSelect.value();
+    const address = mainCustomers[mainCustomer];
+
+    const invoiceDiv = createDiv(`<h2>Rechnung</h2><p>Gesamtarbeitsstunden: ${totalHours}</p><p>Auftraggeber: ${mainCustomer}</p><p>Adresse: ${address}</p>`);
     invoiceDiv.parent('timesheet');
 }
