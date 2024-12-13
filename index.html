@@ -5,25 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projekt Arbeitsstunden</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
     <h1>Projekt Arbeitsstunden Eingabe</h1>
-    <form id="projectForm">
-        <label for="projectName">Projektname:</label>
-        <select id="projectName"></select>
-        <br>
-        <label for="clientName">Kundenname:</label>
-        <select id="clientName"></select>
-        <br>
-        <label for="startDate">Startdatum:</label>
-        <input type="date" id="startDate">
-        <br>
-        <label for="endDate">Enddatum:</label>
-        <input type="date" id="endDate">
-        <br>
-        <button type="button" onclick="window.generateTimesheet()">Zeiterfassung erstellen</button>
-    </form>
+    <div id="formContainer"></div>
     <div id="timesheet"></div>
-    <script src="script.js" type="module"></script>
 </body>
 </html>
